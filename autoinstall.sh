@@ -76,9 +76,8 @@ configure_environment() {
     ZXC_FILE="$HOME_DIR/.zxc"
 
     # NODE_ENV
-    read -p "Enter Node Environment (e.g., testnet): " NODE_ENV
-    export NODE_ENV=${NODE_ENV:-testnet}
-    echo "export NODE_ENV=$NODE_ENV" >> "$ZXC_FILE"
+    export NODE_ENV=testnet
+    echo "export NODE_ENV=testnet" >> "$ZXC_FILE"
 
     # LOG LEVEL
     export LOG_LEVEL=debug
@@ -147,7 +146,7 @@ start_executor() {
     cd "$HOME_DIR/executor/executor/bin" || exit
 
     # Run the executor using nohup in the background
-    nohup ./executor > executor.log 2>&1 &
+    nohup ./executor > $HOME_DIR/executor/executor.log 2>&1 &
     EXECUTOR_PID=$!
     echo "Executor started with PID $EXECUTOR_PID"
     echo "Logs are being written to $HOME_DIR"
