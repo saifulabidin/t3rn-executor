@@ -91,18 +91,39 @@ configure_environment() {
     echo "export PRIVATE_KEY_LOCAL=$PRIVATE_KEY_LOCAL" >> "$HOME_DIR/.bashrc"
 
     # NETWORKS
-    echo "Specify the networks to enable (comma-separated, e.g., arbitrum-sepolia,base-sepolia):"
-    read -p "Networks: " ENABLED_NETWORKS
-    export ENABLED_NETWORKS=${ENABLED_NETWORKS:-'arbitrum-sepolia,base-sepolia'}
+    read -p "Do you want to enable all networks? (Y/n): " ENABLE_ALL
+    ENABLE_ALL=${ENABLE_ALL:-Y}
+    ENABLED_NETWORKS=""
+    if [[ $ENABLE_ALL =~ ^[Yy]$ ]]; then
+        ENABLED_NETWORKS="arbitrum-sepolia,base-sepolia,blast-sepolia,optimism-sepolia,l1rn"
+    else
+        for NETWORK in "arbitrum-sepolia" "optimism-sepolia" "blast-sepolia" "base-sepolia"; do
+            read -p "Will you enable the $NETWORK network? (Y/n): " ENABLE_NETWORK
+            ENABLE_NETWORK=${ENABLE_NETWORK:-Y}
+            if [[ $ENABLE_NETWORK =~ ^[Yy]$ ]]; then
+                if [ -z "$ENABLED_NETWORKS" ]; then
+                    ENABLED_NETWORKS="$NETWORK"
+                else
+                    ENABLED_NETWORKS="$ENABLED_NETWORKS,$NETWORK"
+                fi
+            fi
+        done
+    fi
+    export ENABLED_NETWORKS
     echo "export ENABLED_NETWORKS='$ENABLED_NETWORKS'" >> "$HOME_DIR/.bashrc"
 
-    # OPTIONAL RPC
-    read -p "Do you want to add a custom RPC URL? (y/n): " ADD_RPC
-    if [[ $ADD_RPC == "y" ]]; then
-        read -p "Enter network name (e.g., arbt): " NETWORK_NAME
-        read -p "Enter RPC URLs (comma-separated): " RPC_ENDPOINTS
-        export RPC_ENDPOINTS_${NETWORK_NAME}=$RPC_ENDPOINTS
-        echo "export RPC_ENDPOINTS_${NETWORK_NAME}='$RPC_ENDPOINTS'" >> "$HOME_DIR/.bashrc"
+    # RPC ENDPOINTS
+    read -p "Do you want to use the default RPC URLs? (Y/n): " USE_DEFAULT_RPC
+    USE_DEFAULT_RPC=${USE_DEFAULT_RPC:-Y}
+    if [[ ! $USE_DEFAULT_RPC =~ ^[Yy]$ ]]; then
+        for NETWORK in "arbitrum-sepolia" "optimism-sepolia" "blast-sepolia" "base-sepolia"; do
+            if [[ $ENABLED_NETWORKS == *"$NETWORK"* ]]; then
+                read -p "Enter RPC URL for $NETWORK: " RPC_URL
+                NETWORK_SHORT=$(echo $NETWORK | cut -d'-' -f1 | tr '[:lower:]' '[:upper:]')
+                export RPC_ENDPOINTS_${NETWORK_SHORT}=$RPC_URL
+                echo "export RPC_ENDPOINTS_${NETWORK_SHORT}='$RPC_URL'" >> "$HOME_DIR/.bashrc"
+            fi
+        done
     fi
 
     # PROCESS VIA API OR RPC
@@ -121,6 +142,7 @@ start_executor() {
     nohup ./executor > executor.log 2>&1 &
     EXECUTOR_PID=$!
     echo "Executor started with PID $EXECUTOR_PID"
+    echo "Logs are being written to $HOME_DIR"
     echo "Logs are being written to $HOME_DIR/executor/executor.log"
 }
 
