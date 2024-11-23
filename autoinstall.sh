@@ -72,27 +72,30 @@ download_executor() {
 configure_environment() {
     process_message "Configuring environment variables"
 
+    # Define the path to the .zxc file
+    ZXC_FILE="$HOME_DIR/.zxc"
+
     # NODE_ENV
     read -p "Enter Node Environment (e.g., testnet): " NODE_ENV
     export NODE_ENV=${NODE_ENV:-testnet}
-    echo "export NODE_ENV=$NODE_ENV" >> "$HOME_DIR/.bashrc"
+    echo "export NODE_ENV=$NODE_ENV" >> "$ZXC_FILE"
 
     # LOG LEVEL
     export LOG_LEVEL=debug
-    echo "export LOG_LEVEL=debug" >> "$HOME_DIR/.bashrc"
+    echo "export LOG_LEVEL=debug" >> "$ZXC_FILE"
     export LOG_PRETTY=false
-    echo "export LOG_PRETTY=false" >> "$HOME_DIR/.bashrc"
+    echo "export LOG_PRETTY=false" >> "$ZXC_FILE"
 
     # PROCESS ORDERS AND CLAIMS
     export EXECUTOR_PROCESS_ORDERS=true
-    echo "export EXECUTOR_PROCESS_ORDERS=true" >> "$HOME_DIR/.bashrc"
+    echo "export EXECUTOR_PROCESS_ORDERS=true" >> "$ZXC_FILE"
     export EXECUTOR_PROCESS_CLAIMS=true
-    echo "export EXECUTOR_PROCESS_CLAIMS=true" >> "$HOME_DIR/.bashrc"
+    echo "export EXECUTOR_PROCESS_CLAIMS=true" >> "$ZXC_FILE"
 
     # PRIVATE KEY
     read -p "Enter your PRIVATE_KEY_LOCAL: " PRIVATE_KEY_LOCAL
     export PRIVATE_KEY_LOCAL=$PRIVATE_KEY_LOCAL
-    echo "export PRIVATE_KEY_LOCAL=$PRIVATE_KEY_LOCAL" >> "$HOME_DIR/.bashrc"
+    echo "export PRIVATE_KEY_LOCAL=$PRIVATE_KEY_LOCAL" >> "$ZXC_FILE"
 
     # NETWORKS
     read -p "Do you want to enable all networks? (Y/n): " ENABLE_ALL
@@ -114,7 +117,7 @@ configure_environment() {
         done
     fi
     export ENABLED_NETWORKS
-    echo "export ENABLED_NETWORKS='$ENABLED_NETWORKS'" >> "$HOME_DIR/.bashrc"
+    echo "export ENABLED_NETWORKS='$ENABLED_NETWORKS'" >> "$ZXC_FILE"
 
     # RPC ENDPOINTS
     read -p "Do you want to use the default RPC URLs? (Y/n): " USE_DEFAULT_RPC
@@ -125,17 +128,18 @@ configure_environment() {
                 read -p "Enter RPC URL for $NETWORK: " RPC_URL
                 NETWORK_SHORT=$(echo $NETWORK | cut -d'-' -f1 | tr '[:lower:]' '[:upper:]')
                 export RPC_ENDPOINTS_${NETWORK_SHORT}=$RPC_URL
-                echo "export RPC_ENDPOINTS_${NETWORK_SHORT}='$RPC_URL'" >> "$HOME_DIR/.bashrc"
+                echo "export RPC_ENDPOINTS_${NETWORK_SHORT}='$RPC_URL'" >> "$ZXC_FILE"
             fi
         done
     fi
 
     # PROCESS VIA API OR RPC
     export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true
-    echo "export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true" >> "$HOME_DIR/.bashrc"
+    echo "export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true" >> "$ZXC_FILE"
 
-    echo "Environment variables configured. Restart terminal or run 'source ~/.bashrc' to apply changes."
+    echo "Environment variables configured. To apply changes, run 'source ~/.zxc' or restart your terminal."
 }
+
 
 # Function to start Executor in the background
 start_executor() {
