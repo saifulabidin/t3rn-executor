@@ -43,6 +43,7 @@ check_root() {
 }
 
 # Function to download the latest Executor binary
+# Function to download the latest Executor binary
 download_executor() {
     process_message "Downloading the latest Executor binary"
     # Fetch the latest release tag from GitHub API
@@ -61,8 +62,11 @@ download_executor() {
     curl -L $DOWNLOAD_URL -o "$HOME_DIR/$FILE_NAME"
     process_message "Extracting Executor binary"
     tar -xzf "$HOME_DIR/$FILE_NAME" -C "$HOME_DIR"
-    echo "File extracted to $HOME_DIR. Navigate to the 'executor' folder to proceed."
+    # Grant execute permissions to the executor binary
+    chmod +x "$HOME_DIR/executor/executor"
+    echo "File extracted and permissions set. Navigate to the 'executor' folder to proceed."
 }
+
 
 # Function to configure environment variables
 configure_environment() {
