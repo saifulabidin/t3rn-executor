@@ -63,7 +63,7 @@ download_executor() {
     process_message "Extracting Executor binary"
     tar -xzf "$HOME_DIR/$FILE_NAME" -C "$HOME_DIR"
     # Grant execute permissions to the executor binary
-    chmod +x "$HOME_DIR/executor/executor"
+    chmod +x "$HOME_DIR/executor/executor/bin/executor"
     echo "File extracted and permissions set. Navigate to the 'executor' folder to proceed."
 }
 
