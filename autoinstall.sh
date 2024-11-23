@@ -136,7 +136,7 @@ configure_environment() {
     # PROCESS VIA API OR RPC
     export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true
     echo "export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true" >> "$ZXC_FILE"
-
+    source ~/.zxc
     echo "Environment variables configured. To apply changes, run 'source ~/.zxc' or restart your terminal."
 }
 
@@ -144,7 +144,7 @@ configure_environment() {
 # Function to start Executor in the background
 start_executor() {
     process_message "Starting Executor in the background"
-    cd "$HOME_DIR/executor" || exit
+    cd "$HOME_DIR/executor/executor/bin" || exit
 
     # Run the executor using nohup in the background
     nohup ./executor > executor.log 2>&1 &
