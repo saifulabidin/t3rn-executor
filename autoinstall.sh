@@ -114,7 +114,7 @@ start_executor() {
 # Main function
 main() {
     print_banner
-    check_root
+    ##check_root
     download_executor
     configure_environment
     start_executor
