@@ -24,10 +24,14 @@ check_root() {
 
 # Function to delete old data
 delete_old_data() {
-    process_message "Deleting Old Data + Old Binnary"
-    rm -rvf $HOME_DIR.zxc
-    rm -rvf $HOME_DIR/executor/
-    rm -rf $HOME_DIR/executor-linux-*
+    process_message "Deleting Old Data + Old Binary"
+    
+    # Ensure the correct file and directory paths are used
+    rm -rvf "$HOME_DIR/.zxc"  # Delete the .zxc profile file
+    rm -rvf "$HOME_DIR/executor/"  # Delete the executor directory
+    rm -rf "$HOME_DIR/executor-linux-*"  # Delete any old executor-linux files
+    
+    echo "Old data and binaries have been removed."
 }
 
 # Function to download the latest Executor binary
