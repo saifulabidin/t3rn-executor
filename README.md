@@ -3,7 +3,9 @@
 1. ``git clone https://github.com/dwisyafriadi2/t3rn-executor.git``
 2. ``cd t3rn-executor``
 3. ``chmod +x autoinstall.sh``
-4. ``./autoinstall.sh``
+4. ``chmod +x cek-status.sh``
+5. ``chmod +x stop-executor.sh``
+6. ``./autoinstall.sh``
 
 ## Join My Channel on Telegram
 [Join Now](https://t.me/dasarpemulung)
