@@ -25,6 +25,7 @@ check_root() {
 # Function to delete old data
 delete_old_data() {
     process_message "Deleting Old Data + Old Binnary"
+    rm -rvf $HOME_DIR/.xzc
     rm -rvf $HOME_DIR/executor/
     rm -rf $HOME_DIR/executor-linux-*
 }
@@ -120,7 +121,7 @@ configure_environment() {
 
     # PROCESS VIA API OR RPC
     export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=false
-    echo "export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true" >> "$ZXC_FILE"
+    echo "export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=false" >> "$ZXC_FILE"
     source ~/.zxc
     echo "Environment variables configured. To apply changes, run 'source ~/.zxc' or restart your terminal."
 }
@@ -138,8 +139,8 @@ start_executor() {
     echo "Logs are being written to $HOME_DIR"
     echo "Logs are being written to $HOME_DIR/executor/executor.log"
     echo "Check Log tail -f $HOME_DIR/executor/executor.log"
-    echo "Check Status Executor ./$HOME_DIR/t3rn-executor/cek-status.sh"
-    echo "Stop Executor ./$HOME_DIR/t3rn-executor/stop-executor.sh"
+    echo "Check Status Executor .$HOME_DIR/t3rn-executor/cek-status.sh"
+    echo "Stop Executor .$HOME_DIR/t3rn-executor/stop-executor.sh"
 }
 
 # Main function
