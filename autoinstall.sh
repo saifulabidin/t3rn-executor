@@ -22,7 +22,14 @@ check_root() {
     fi
 }
 
-# Function to download the latest Executor binary
+# Function to delete old data
+delete_old_data() {
+    process_message "Deleting Old Data + Old Binnary"
+    rm -f $HOME_DIR/executor/
+    rm -rf executor-linux-*
+
+}
+
 # Function to download the latest Executor binary
 download_executor() {
     process_message "Downloading the latest Executor binary"
@@ -137,6 +144,7 @@ start_executor() {
 main() {
     print_banner
     check_root
+    delete_old_data
     download_executor
     configure_environment
     start_executor
