@@ -82,6 +82,11 @@ configure_environment() {
     export EXECUTOR_PROCESS_CLAIMS=true
     echo "export EXECUTOR_PROCESS_CLAIMS=true" >> "$ZXC_FILE"
 
+    # GASS FEE
+    read -p "Setup Your Gass Fee (example 100) : " EXECUTOR_MAX_L3_GAS_PRICE
+    export EXECUTOR_MAX_L3_GAS_PRICE=$EXECUTOR_MAX_L3_GAS_PRICE
+    echo "export EXECUTOR_MAX_L3_GAS_PRICE=$EXECUTOR_MAX_L3_GAS_PRICE" >> "$ZXC_FILE"
+
     # PRIVATE KEY
     read -p "Enter your PRIVATE_KEY_LOCAL: " PRIVATE_KEY_LOCAL
     export PRIVATE_KEY_LOCAL=$PRIVATE_KEY_LOCAL
