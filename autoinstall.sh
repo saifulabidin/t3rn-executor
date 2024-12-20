@@ -25,9 +25,9 @@ check_root() {
 # Function to delete old data
 delete_old_data() {
     process_message "Deleting Old Data + Old Binnary"
-    rm -f $HOME_DIR/executor/
-    rm -rf executor-linux-*
-
+    rm -rvf $HOME_DIR/t3rn-executor/
+    rm -rvf $HOME_DIR/executor/
+    rm -rf $HOME_DIR/executor-linux-*
 }
 
 # Function to download the latest Executor binary
