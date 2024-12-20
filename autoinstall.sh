@@ -25,7 +25,7 @@ check_root() {
 # Function to delete old data
 delete_old_data() {
     process_message "Deleting Old Data + Old Binnary"
-    rm -rvf $HOME_DIR/.zxc
+    rm -rvf $HOME_DIR.zxc
     rm -rvf $HOME_DIR/executor/
     rm -rf $HOME_DIR/executor-linux-*
 }
