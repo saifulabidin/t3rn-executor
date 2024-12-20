@@ -129,8 +129,8 @@ configure_environment() {
     fi
 
     # PROCESS VIA API OR RPC
-    export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=false
-    echo "export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=false" >> "$ZXC_FILE"
+    export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true
+    echo "export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=true" >> "$ZXC_FILE"
     source ~/.zxc
     echo "Environment variables configured. To apply changes, run 'source ~/.zxc' or restart your terminal."
 }
