@@ -137,6 +137,9 @@ start_executor() {
     echo "Executor started with PID $EXECUTOR_PID"
     echo "Logs are being written to $HOME_DIR"
     echo "Logs are being written to $HOME_DIR/executor/executor.log"
+    echo "Check Log tail -f $HOME_DIR/executor/executor.log"
+    echo "Check Status Executor ./$HOME_DIR/t3rn-executor/cek-status.sh"
+    echo "Stop Executor ./$HOME_DIR/t3rn-executor/stop-executor.sh"
 }
 
 # Main function
