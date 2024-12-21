@@ -5,7 +5,8 @@
 3. ``chmod +x autoinstall.sh``
 4. ``chmod +x cek-status.sh``
 5. ``chmod +x stop-executor.sh``
-6. ``./autoinstall.sh``
+6. ``chmod +x start-executor.sh``
+7. ``./autoinstall.sh``
 
 ## Join My Channel on Telegram
 [Join Now](https://t.me/dasarpemulung)
