@@ -6,8 +6,8 @@
 4. ``chmod +x cek-status.sh``
 5. ``chmod +x stop-executor.sh``
 6. ``chmod +x start-executor.sh``
-7. ``./autoinstall.sh``
 
+## Next Step
 1. Install & Start T3rn
    ``./autoinstall.sh1``
 1. Cek Status Aplikasi
