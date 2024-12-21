@@ -73,8 +73,8 @@ configure_environment() {
     # LOG LEVEL
     export LOG_LEVEL=debug
     echo "export LOG_LEVEL=debug" >> "$ZXC_FILE"
-    export LOG_PRETTY=true
-    echo "export LOG_PRETTY=true" >> "$ZXC_FILE"
+    export LOG_PRETTY=false
+    echo "export LOG_PRETTY=false" >> "$ZXC_FILE"
 
     # PROCESS ORDERS AND CLAIMS
     export EXECUTOR_PROCESS_ORDERS=true
