@@ -9,7 +9,7 @@
 
 ## Next Step
 1. Install & Start T3rn
-   ``./autoinstall.sh1``
+   ``./autoinstall.sh``
 1. Cek Status Aplikasi
    ``./cek-status.sh``
 2. Stop Executor
