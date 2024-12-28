@@ -34,22 +34,20 @@ delete_old_data() {
     echo "Old data and binaries have been removed."
 }
 
-# Function to download the latest Executor binary
+# Function to download the latest Executor binary (specific version)
 download_executor() {
-    process_message "Downloading the latest Executor binary"
-    # Fetch the latest release tag from GitHub API
-    LATEST_TAG=$(curl -s https://api.github.com/repos/t3rn/executor-release/releases/latest | grep tag_name | cut -d '"' -f 4)
+    process_message "Downloading the Executor binary (v0.31.0)"
     # Determine the OS type
     OS_TYPE=$(uname -s)
     if [ "$OS_TYPE" == "Linux" ]; then
-        FILE_NAME="executor-linux-$LATEST_TAG.tar.gz"
+        FILE_NAME="executor-linux-v0.31.0.tar.gz"
     elif [ "$OS_TYPE" == "Darwin" ]; then
-        FILE_NAME="executor-macosx-$LATEST_TAG.tar.gz"
+        FILE_NAME="executor-macosx-v0.31.0.tar.gz"
     else
         echo "Unsupported OS: $OS_TYPE"
         exit 1
     fi
-    DOWNLOAD_URL="https://github.com/t3rn/executor-release/releases/download/$LATEST_TAG/$FILE_NAME"
+    DOWNLOAD_URL="https://github.com/t3rn/executor-release/releases/download/v0.31.0/$FILE_NAME"
     curl -L $DOWNLOAD_URL -o "$HOME_DIR/$FILE_NAME"
     process_message "Extracting Executor binary"
     tar -xzf "$HOME_DIR/$FILE_NAME" -C "$HOME_DIR"
@@ -57,7 +55,6 @@ download_executor() {
     chmod +x "$HOME_DIR/executor/executor/bin/executor"
     echo "File extracted and permissions set. Navigate to the 'executor' folder to proceed."
 }
-
 
 # Function to configure environment variables
 configure_environment() {
@@ -135,7 +132,6 @@ configure_environment() {
     echo "Environment variables configured. To apply changes, run 'source ~/.zxc' or restart your terminal."
 }
 
-
 # Function to start Executor in the background
 start_executor() {
     process_message "Starting Executor in the background"
@@ -145,7 +141,6 @@ start_executor() {
     nohup ./executor > $HOME_DIR/executor/executor.log 2>&1 &
     EXECUTOR_PID=$!
     echo "Executor started with PID $EXECUTOR_PID"
-    echo "Logs are being written to $HOME_DIR"
     echo "Logs are being written to $HOME_DIR/executor/executor.log"
     echo "Check Log tail -f $HOME_DIR/executor/executor.log"
     echo "Check Status Executor $HOME_DIR/t3rn-executor/cek-status.sh"
