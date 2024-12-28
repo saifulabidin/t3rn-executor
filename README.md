@@ -5,7 +5,18 @@
 3. ``chmod +x autoinstall.sh``
 4. ``chmod +x cek-status.sh``
 5. ``chmod +x stop-executor.sh``
-6. ``./autoinstall.sh``
+6. ``chmod +x start-executor.sh``
+
+## Next Step
+1. Install & Start T3rn
+   ``./autoinstall.sh1``
+1. Cek Status Aplikasi
+   ``./cek-status.sh``
+2. Stop Executor
+   ``./stop-executor.sh``
+3. Start Executor
+   ``./start-executor.sh``
+
 
 ## Join My Channel on Telegram
 [Join Now](https://t.me/dasarpemulung)
